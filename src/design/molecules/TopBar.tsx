@@ -11,9 +11,9 @@ export const TopBar = () => {
     <Header>
       <Title innerText="🎬🍿 Movie library" />
       <SearchInput
+        type="text"
         placeholder="🔎 Search for movie"
         onChange={onChange}
-        value=""
       />
     </Header>
   );

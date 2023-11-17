@@ -1,11 +1,18 @@
 import { TopBar } from "../../../design/molecules/TopBar";
-import { MovieList } from "./MovieList";
+import  MovieList  from "./MovieList";
+import { QueryClient, QueryClientProvider } from 'react-query'
+const queryClient = new QueryClient()
 
 export const MovieLibrary = () => {
   return (
     <>
       <TopBar />
-      <MovieList />
+       <QueryClientProvider client={queryClient}>
+
+      <MovieList/>
+
+      </QueryClientProvider>
+
     </>
   );
 };
