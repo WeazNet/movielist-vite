@@ -1,6 +1,6 @@
-import { SearchInput } from "../atoms/SearchInput";
-import { Title } from "../atoms/Title";
-import { Header } from "./Header";
+import { Input } from "../../../design/atoms/Input";
+import { Title } from "../../../design/atoms/Title";
+import { Header } from "../../../design/molecules/Header";
 
 const onChange = (e: any) => {
   return e;
@@ -10,8 +10,8 @@ export const TopBar = () => {
   return (
     <Header>
       <Title innerText="🎬🍿 Movie library" />
-      <SearchInput
-        type="text"
+      <Input
+        value=""
         placeholder="🔎 Search for movie"
         onChange={onChange}
       />

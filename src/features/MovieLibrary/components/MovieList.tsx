@@ -1,31 +1,30 @@
 import { Link } from "react-router-dom";
 import { MovieCard } from "../../../design/atoms/MovieCard";
-import { useMovies } from "../../../useMovies";
+import { useQuery } from "react-query";
+import { getNowPlayingMovies } from "../rules/getNowPlayingMovies";
+import { MovieCardSkeleton } from "../../../design/atoms/MovieCardSkeleton";
+import { BASE_PATH_IMAGE } from "../../../services/utils";
 
 function MovieList() {
-  const { data: movies } = useMovies();
-  
+  const { isLoading, data: movies } = useQuery("[movies]", getNowPlayingMovies);
+
   return (
-    <div className="px-5 py-5"> {/* Padding around the movie list */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8"> {/* Responsive grid layout */}
-        {movies ? movies.map((movie) => (
-          <div key={movie.id} className="flex flex-col items-center">
-            <div className="bg-gray-800 rounded overflow-hidden shadow-lg"> {/* Card styling */}
-              <img
-                className="w-full" // Full width of the card
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
+    <div className="px-5 py-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        {isLoading && <MovieCardSkeleton number={10} />}
+        {movies &&
+          movies.map((movie) => (
+            <Link key={movie.id} to={`movie/${movie.id}`}>
+              <MovieCard
+                imageSrc={BASE_PATH_IMAGE + movie.poster_path}
+                title={movie.title}
+                id={movie.id}
               />
-              <h3 className="text-center text-white text-lg mt-2 mb-4"> {/* Title styling */}
-                {movie.title}
-              </h3>
-            </div>
-          </div>
-        )) : <p className="text-center text-white">Error</p>}
+            </Link>
+          ))}
       </div>
     </div>
   );
 }
 
 export default MovieList;
-
