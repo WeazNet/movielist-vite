@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { UseQueryResult, useQuery } from "react-query";
 import { ExitButton } from "../../../design/atoms/ExitButton";
 import { getMovieById } from "../rules/getMovieById";
 import { BASE_PATH_IMAGE } from "../../../services/utils";
@@ -6,47 +6,62 @@ import { useParams } from "react-router-dom";
 import { Genre, Movie as MovieInterface } from "../../../interfaces";
 import { MovieInformationsSection } from "../../../design/molecules/MovieInformationsSection";
 import { BeatLoader } from "react-spinners";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { MovieSection } from "../../../design/molecules/MovieSection";
+import { Title } from "../../../design/atoms/Title";
 
 export const Movie = () => {
-  const [genre, setGenre] = useState("");
+  const [genres, setGenres] = useState("");
 
   const { id } = useParams();
-  if (!id) throw Error(`Movie ${id} not found`);
+  if (!id) return;
+
   const {
     isLoading,
     data: movie,
-  }: { isLoading: boolean; data: MovieInterface | undefined } = useQuery(
-    ["movies", id],
-    () => getMovieById(id)
+    error,
+  }: UseQueryResult<MovieInterface> = useQuery(["movies", id], () =>
+    getMovieById(id)
   );
 
-  if (movie)
-    movie.genres.map((elt) => {
-      return (genre == "") ? setGenre(elt.name) : setGenre(genre + ", " + elt.name)
-    });
+  useEffect(() => {
+    if (movie) {
+      setGenres(movie.genres.map((elt) => elt.name).join(", "));
+    }
+  }, [movie]);
+
+  if (error) throw new Error("Movie not found");
 
   return (
-    <>
-      <header>
-        <ExitButton to="/" />
-        {isLoading && (
-          <div className="min-w-full text-center">
-            <BeatLoader color="white" />
-          </div>
-        )}
-        {movie && (
+    movie && (
+      <MovieSection imageSrc={BASE_PATH_IMAGE + movie?.backdrop_path}>
+        <header>
+          <ExitButton to="/" />
+          {isLoading && (
+            <div className="min-w-full text-center">
+              <BeatLoader color="white" />
+            </div>
+          )}
           <MovieInformationsSection
             id={parseInt(id)}
             title={movie.title}
             poster_path={BASE_PATH_IMAGE + movie.poster_path}
             overview={movie.overview}
-            genre={genre}
+            genre={genres}
             release_date={movie.release_date}
           />
-        )}
-      </header>
-    </>
+        </header>
+        <section>
+          <div>
+            <Title innerText="Credits" />
+          </div>
+          <div>
+            <Title innerText="Images" />
+          </div>
+
+        </section>
+      </MovieSection>
+    )
   );
+
 };

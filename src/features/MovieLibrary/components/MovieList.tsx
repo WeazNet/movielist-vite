@@ -1,27 +1,15 @@
 import { Link } from "react-router-dom";
 import { MovieCard } from "../../../design/atoms/MovieCard";
-import { UseQueryResult, useQueries } from "react-query";
+import { UseQueryResult, useQuery } from "react-query";
 import { getNowPlayingMovies } from "../rules/getNowPlayingMovies";
 import { MovieCardSkeleton } from "../../../design/atoms/MovieCardSkeleton";
 import { BASE_PATH_IMAGE, NB_CARDS_IN_ONE_PAGE } from "../../../services/utils";
-import { getGenreListMovies } from "../rules/getGenreListMovies";
-import { Genre, Movie } from "../../../interfaces";
+import { Movie } from "../../../interfaces";
 
 function MovieList() {
-  const results: [UseQueryResult<Movie[]>, UseQueryResult<Genre[]>] = useQueries(
-    [
-      { queryKey: ['movies'], queryFn: getNowPlayingMovies, staleTime: 60_000 },
-      { queryKey: ['genres'], queryFn: getGenreListMovies, staleTime: Infinity },
-    ]
-  );
+  const { isLoading, data: movies, error }: UseQueryResult<Movie[]> = useQuery(['movies'], () => getNowPlayingMovies(), { staleTime: 60_000 });
 
-  const isLoading: boolean = results.some(query => query.isLoading);
-  console.log(isLoading);
-
-  const movies: Movie[] | undefined = results[0].data;
-  const errors: any[] = [results[0].error, results[1].error];
-
-  if (errors[0] | errors[1])
+  if (error)
     throw Error("Server is unreachable");
 
   return (
