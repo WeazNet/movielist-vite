@@ -1,1 +1,0 @@
-https://javascript.plainenglish.io/creating-a-skeleton-load-component-in-nextjs-13-with-tailwind-css-175f2749c512
