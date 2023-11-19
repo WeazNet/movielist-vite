@@ -1,18 +1,40 @@
 import { Link } from "react-router-dom";
 import { MovieCard } from "../../../design/atoms/MovieCard";
+import { useQuery } from "react-query";
+import { getNowPlayingMovies } from "../rules/getNowPlayingMovies";
+import { MovieCardSkeleton } from "../../../design/atoms/MovieCardSkeleton";
+import { BASE_PATH_IMAGE, NB_CARDS_IN_ONE_PAGE } from "../../../services/utils";
 
-export const MovieList = () => {
+
+
+function MovieList() {
+  const {
+    isLoading,
+    error,
+    data: movies,
+  } = useQuery(["movies"], () => getNowPlayingMovies(), {
+    staleTime: 60_000,
+  });
+  if (error) {
+    throw Error("Server is unreachable");
+  }
   return (
-    <>
-      <Link to="/movie/1">
-        <MovieCard id={1} imageSrc={"#"} />
-      </Link>
-      <Link to="/movie/2">
-        <MovieCard id={2} imageSrc={"#"} />
-      </Link>
-      <Link to="/movie/3">
-        <MovieCard id={3} imageSrc={"#"} />
-      </Link>
-    </>
-  )
-};
+    <div className="px-5 py-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        {isLoading && <MovieCardSkeleton number={NB_CARDS_IN_ONE_PAGE} />}
+        {movies &&
+          movies.map((movie) => (
+            <Link key={movie.id} to={`movie/${movie.id}`}>
+              <MovieCard
+                imageSrc={BASE_PATH_IMAGE + movie.poster_path}
+                title={movie.title}
+                id={movie.id}
+              />
+            </Link>
+          ))}
+      </div>
+    </div>
+  );
+}
+
+export default MovieList;

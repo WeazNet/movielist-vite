@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "node-fetch": "^2.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
+    "@types/node": "^20.9.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -28,6 +31,6 @@
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.5.0"
   }
 }

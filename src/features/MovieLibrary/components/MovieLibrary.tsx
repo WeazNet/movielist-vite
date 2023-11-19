@@ -1,5 +1,5 @@
-import { TopBar } from "../../../design/molecules/TopBar";
-import { MovieList } from "./MovieList";
+import { TopBar } from "./TopBar";
+import MovieList from "./MovieList";
 
 export const MovieLibrary = () => {
   return (
