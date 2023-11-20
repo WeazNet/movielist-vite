@@ -7,9 +7,9 @@ import { Artist, Crew, Image, Movie as MovieInterface } from "../../../interface
 import { MovieInformationsSection } from "../../../design/molecules/MovieInformationsSection";
 import { BeatLoader } from "react-spinners";
 import { MovieSection } from "../../../design/molecules/MovieSection";
-import { getCreditsById } from "../rules/getCreditsById";
+import { getCreditsById } from "../rules/getMovieCreditsById";
 import { CreditsDiv } from "./CreditsDiv";
-import { getImagesById } from "../rules/getImagesById";
+import { getImagesById } from "../rules/getMovieImagesById";
 import { ImagesDiv } from "./ImagesDiv";
 
 export const Movie = () => {

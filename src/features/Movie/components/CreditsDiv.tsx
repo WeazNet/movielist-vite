@@ -15,7 +15,7 @@ export const CreditsDiv = ({ data }: { data: any[] }) => {
   return (
     <div>
       <Title innerText="Credits" />
-      <div className="my-4 scroll-smooth sm:scroll-auto overflow-x-auto touch-pan-x inline-flex gap-2 overflow-visible w-full">
+      <div className="my-4 scroll-smooth sm:scroll-auto overflow-x-auto touch-pan-x inline-flex gap-4 overflow-visible w-full">
         {data.map((artist) => (
           <ArtistCard
             key={artist.id}
