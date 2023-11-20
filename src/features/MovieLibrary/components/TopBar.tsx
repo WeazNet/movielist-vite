@@ -2,18 +2,14 @@ import { Input } from "../../../design/atoms/Input";
 import { Title } from "../../../design/atoms/Title";
 import { Header } from "../../../design/molecules/Header";
 
-const onChange = (e: any) => {
-  return e;
-};
-
-export const TopBar = () => {
+export const TopBar = ({ onInputChange, inputValue }:{onInputChange: (e: string) => void, inputValue: string}) => {
   return (
     <Header>
       <Title innerText="🎬🍿 Movie library" />
       <Input
-        value=""
+        value={inputValue}
         placeholder="🔎 Search for movie"
-        onChange={onChange}
+        onChange={onInputChange}
       />
     </Header>
   );
