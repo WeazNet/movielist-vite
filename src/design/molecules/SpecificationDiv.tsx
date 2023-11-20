@@ -1,4 +1,5 @@
-import { Text } from "../atoms/Text";
+import { DateTime } from "luxon";
+import { ItalicText } from "../atoms/ItalicText";
 
 export const SpecificationDiv = ({
   genre,
@@ -7,10 +8,13 @@ export const SpecificationDiv = ({
   genre: string;
   release_date: string;
 }) => {
+  const date = DateTime.fromISO(release_date ?? "");
+
+
   return (
-    <div className="italic">
-      <Text content={genre} />
-      <Text content={release_date} />
+    <div>
+      <ItalicText content={genre} />
+      <ItalicText content={date.toLocaleString(DateTime.DATE_MED)} />
     </div>
   );
 };
