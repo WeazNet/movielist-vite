@@ -1,4 +1,4 @@
-export const MovieCard = ({
+export const Card = ({
   id,
   title,
   imageSrc,

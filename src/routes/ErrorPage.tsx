@@ -13,7 +13,6 @@ export default function ErrorPage() {
       {(error.status == 404 && <Page404 />) || (
         <div className="text-white w-[400px] bg-gray-500 rounded-2xl p-4 sm:mx-auto leading-7">
           <Title innerText="Oops!" />
-          <Text content="Une erreur est survenue." />
           <Text content={error.message} />
         </div>
       )}

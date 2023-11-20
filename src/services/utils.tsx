@@ -3,4 +3,3 @@ export const NB_CARDS_IN_ONE_PAGE: number = 10;
 export const THEMOVIEDB_URL_NOWPLAYING: string =
   "https://api.themoviedb.org/3/movie/now_playing";
 export const THEMOVIEDB_URL_MOVIE: string = "https://api.themoviedb.org/3/movie/";
-export const THEMOVIEDB_URL_GENRE_LIST: string = "https://api.themoviedb.org/3/genre/movie/list";
