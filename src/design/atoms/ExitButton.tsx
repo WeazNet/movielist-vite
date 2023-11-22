@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const ExitButton = ({ to }: { to: string }) => {
   return (
     <Link to={to}>
-      <span className="flex items-center text-lg text-white hover:text-cyan-400 transition ease-in-out">
+      <span className="flex items-center text-lg text-white hover:text-yellow-200 transition ease-in-out">
         <FaArrowLeft />
         <span className="ml-2">Back</span>
       </span>

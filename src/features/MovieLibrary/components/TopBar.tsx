@@ -1,11 +1,21 @@
+import { useContext } from "react";
+import { SearchBarContext } from "../../../contexts/SearchBarContext";
 import { Input } from "../../../design/atoms/Input";
-import { Title } from "../../../design/atoms/Title";
 import { Header } from "../../../design/molecules/Header";
+import { BigTitle } from "../../../design/atoms/BigTitle";
+import { NavBar } from "./NavBar";
 
-export const TopBar = ({ onInputChange, inputValue }:{onInputChange: (e: string) => void, inputValue: string}) => {
+export const TopBar = () => {
+  const { inputValue, setInputValue } = useContext(SearchBarContext);
+
+  const onInputChange = (value: string) => {
+    setInputValue(value);
+  };
+
   return (
     <Header>
-      <Title innerText="🎬🍿 Movie library" />
+      <BigTitle content="🎬🍿 Movie library" />
+      <NavBar />
       <Input
         value={inputValue}
         placeholder="🔎 Search for movie"

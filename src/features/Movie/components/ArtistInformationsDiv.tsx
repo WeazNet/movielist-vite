@@ -1,5 +1,5 @@
-import { ItalicText } from "../atoms/ItalicText";
-import { Text } from "../atoms/Text";
+import { ItalicText } from "../../../design/atoms/ItalicText";
+import { Text } from "../../../design/atoms/Text";
 
 export const ArtistInformationsDiv = ({
   real_name,

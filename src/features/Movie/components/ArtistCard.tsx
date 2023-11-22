@@ -1,4 +1,4 @@
-import { Card } from "../atoms/Card";
+import { Card } from "../../../design/atoms/Card";
 import { ArtistInformationsDiv } from "./ArtistInformationsDiv";
 
 export const ArtistCard = ({

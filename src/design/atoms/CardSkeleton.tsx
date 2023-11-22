@@ -1,4 +1,4 @@
-export const MovieCardSkeleton = ({ number }: { number: number }) => {
+export const CardSkeleton = ({ number }: { number: number }) => {
   return Array(number)
     .fill(0)
     .map((_, id) => (

@@ -1,48 +1,66 @@
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Loader } from "../../../design/atoms/Loader";
+import { Grid } from "../../../design/molecules/Grid";
+import { CardSkeleton } from "../../../design/atoms/CardSkeleton";
+import { BASE_PATH_IMAGE, NB_CARDS_IN_ONE_PAGE } from "../../../services/utils";
+import { HeartDiv } from "./HeartDiv";
 import { Link } from "react-router-dom";
 import { Card } from "../../../design/atoms/Card";
-import { UseQueryResult, useQuery } from "react-query";
-import { getNowPlayingMovies } from "../rules/getNowPlayingMovies";
-import { MovieCardSkeleton } from "../../../design/atoms/MovieCardSkeleton";
-import { BASE_PATH_IMAGE, NB_CARDS_IN_ONE_PAGE } from "../../../services/utils";
 import { Movie } from "../../../interfaces";
-import { TopBar } from "./TopBar";
-import { useState } from "react";
 
-function MovieList() {
-  const { isLoading, data:movies, isError }: UseQueryResult<Movie[]> = useQuery(['movies'], () => getNowPlayingMovies(), { staleTime: 60_000 });
-
-  const [inputValue, setInputValue] = useState("");
-  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
-
-  const onInputChange = (value: string) => {
-    setInputValue(value);
-
-    const filtered = movies?.filter(movie => movie.title.toLowerCase().includes(value.toLowerCase())) || [];
-    setFilteredMovies(filtered);
-  }
-
-  if (isError)
-    throw Error("Server is unreachable");
-
+export const MovieList = ({
+  favoriteMovies,
+  addMovieToFavorite,
+  removeMovieToFavorite,
+  isLoading,
+  movies,
+  fetchNextPage,
+  hasMorePage,
+}: {
+  favoriteMovies: Movie[];
+  addMovieToFavorite: (movie: Movie) => void;
+  removeMovieToFavorite: (movie: Movie) => void;
+  isLoading: boolean;
+  movies: Movie[] | undefined;
+  fetchNextPage: () => any;
+  hasMorePage: boolean;
+}) => {
   return (
-    <>
-    <TopBar onInputChange={onInputChange} inputValue={inputValue} />
-    <div className="px-4 py-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-        {isLoading && <MovieCardSkeleton number={NB_CARDS_IN_ONE_PAGE} />}
-        {(inputValue ? filteredMovies : movies)?.map((movie) => (
-            <Link title={movie.title} className="hover:scale-105 w-min-content hover:after:block hover:after:absolute hover:after:left-0 hover:after:top-0 hover:after:z-50 hover:after:backdrop-blur-sm hover:after:backdrop-brightness-50 hover:after:min-w-full hover:after:min-h-full hover:after:text-white hover:after:content-[attr(title)] hover:after:transition hover:after:font-bold hover:after:text-center hover:after:pt-[50%] sm:text-xl text-2xl hover:after:px-4" key={movie.id} to={`movie/${movie.id}`}>            
-              <Card
-                imageSrc={BASE_PATH_IMAGE + movie.poster_path}
-                title={movie.title}
-                id={movie.id}
+    <InfiniteScroll
+      dataLength={movies ? movies.length : 0}
+      next={() => fetchNextPage()}
+      hasMore={hasMorePage}
+      loader={<Loader />}
+    >
+      <Grid>
+        <>
+          {isLoading && <CardSkeleton number={NB_CARDS_IN_ONE_PAGE} />}
+          {movies?.map((movie) => (
+            <div
+              key={movie.id}
+              className="relative hover:scale-105 w-min-content min-h-full flex items-center bg-[rgba(0,0,0,.4)] rounded"
+            >
+              <HeartDiv
+                movie={movie}
+                favoriteMovies={favoriteMovies}
+                addMovieToFavorite={addMovieToFavorite}
+                removeMovieToFavorite={removeMovieToFavorite}
               />
-            </Link>
+              <Link title={movie.title} to={`/movie/${movie.id}`}>
+                <Card
+                  imageSrc={
+                    movie.poster_path
+                      ? BASE_PATH_IMAGE + movie.poster_path
+                      : "https://placehold.co/500x750?text=?&font=roboto"
+                  }
+                  title={movie.title}
+                  id={movie.id}
+                />
+              </Link>
+            </div>
           ))}
-      </div>
-    </div>
-    </>
+        </>
+      </Grid>
+    </InfiniteScroll>
   );
-}
-
-export default MovieList;
+};

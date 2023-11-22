@@ -6,3 +6,4 @@ export const apiOptions = {
     Authorization: `Bearer ${API_KEY}`,
   },
 };
+
