@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
-import { NowPlayingMovieLibrary } from "./features/MovieLibrary/components/MovieNowPlaying/NowPlayingMovieLibrary";
+import { NowPlayingMovieLibrary } from "./features/MovieLibrary/components/DirNowPlaying/NowPlayingMovieLibrary";
 import { Movie } from "./features/Movie/components/Movie";
-import { FavoriteMovieLibrary } from "./features/MovieLibrary/components/MovieFavorite/FavoriteMovieLibrary";
-import { UpcomingMovieLibrary } from "./features/MovieLibrary/components/MovieUpcoming/UpcomingMovieLibrary";
+import { FavoriteMovieLibrary } from "./features/MovieLibrary/components/DirFavorite/FavoriteMovieLibrary";
+import { UpcomingMovieLibrary } from "./features/MovieLibrary/components/DirUpcoming/UpcomingMovieLibrary";
 
 export const router = createBrowserRouter([
   {
