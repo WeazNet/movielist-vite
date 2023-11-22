@@ -1,1 +1,1 @@
-# movielist-vite
+# Projet scolaire MovieList (TECHs: React, Vite, Tailwind)
