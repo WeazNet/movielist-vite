@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root";
 import ErrorPage from "./routes/ErrorPage";
-import { MovieLibrary } from "./features/MovieLibrary/components/MovieLibrary";
+import { NowPlayingMovieLibrary } from "./features/MovieLibrary/components/MovieNowPlaying/NowPlayingMovieLibrary";
 import { Movie } from "./features/Movie/components/Movie";
+import { FavoriteMovieLibrary } from "./features/MovieLibrary/components/MovieFavorite/FavoriteMovieLibrary";
+import { UpcomingMovieLibrary } from "./features/MovieLibrary/components/MovieUpcoming/UpcomingMovieLibrary";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +14,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <MovieLibrary />
+        element: <NowPlayingMovieLibrary />
+      },
+      {
+        path: "favorite",
+        element: <FavoriteMovieLibrary />
+      },
+      {
+        path: "upcoming",
+        element: <UpcomingMovieLibrary />
       },
       {
         path: "movie/:id",

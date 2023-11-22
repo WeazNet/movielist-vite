@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { ItalicText } from "../atoms/ItalicText";
+import { ItalicText } from "../../../design/atoms/ItalicText";
 
 export const SpecificationDiv = ({
   genre,

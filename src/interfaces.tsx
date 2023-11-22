@@ -58,3 +58,9 @@ export interface Image {
   vote_count: number;
   width: number;
 }
+
+export interface MoviesQueryResponse {
+  prevOffset: number;
+  total_pages: number;
+  results: Movie[];
+}
