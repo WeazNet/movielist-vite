@@ -1,3 +1,5 @@
+import { PATH_IMAGE_BLANK } from "../../services/utils";
+
 export const Card = ({
   id,
   title,
@@ -15,7 +17,7 @@ export const Card = ({
       <img
         onLoad={(e) => handleLoad(e)}
         className="w-full"
-        src={"https://placehold.co/500x750?text=?&font=roboto"}
+        src={PATH_IMAGE_BLANK}
         alt={"image of " + title}
       />
     </div>
