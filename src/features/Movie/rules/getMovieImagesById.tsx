@@ -9,7 +9,7 @@ export const getImagesById = async (id: string): Promise<Image[]> => {
   );
   const data = await response.json();
   const images: Image[] = data.backdrops.filter((image: Image) => {
-    return image.iso_639_1 == "en";
+    return image.iso_639_1 == "en" || image.iso_639_1 == null;
   });
 
   return images;
