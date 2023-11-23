@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import { Card } from "../../../../design/atoms/Card";
-import { BASE_PATH_IMAGE } from "../../../../services/utils";
 import { useContext } from "react";
 import { Grid } from "../../../../design/molecules/Grid";
 import { SearchBarContext } from "../../../../contexts/SearchBarContext";
