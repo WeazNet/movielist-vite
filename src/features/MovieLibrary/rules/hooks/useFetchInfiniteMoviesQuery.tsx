@@ -35,6 +35,8 @@ export const useFetchInfiniteMoviesQuery = ({
 
   const movies: Movie[] | undefined = data?.pages?.reduce(
     (prev: any[], curr) => {
+      if (!curr.results)
+        throw Error("Server is unreachable")
       return [...prev, ...curr.results];
     },
     []
