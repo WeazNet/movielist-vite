@@ -4,7 +4,6 @@ import { RateDiv } from "./RateDiv";
 import { Card } from "../../../design/atoms/Card";
 import { BASE_PATH_IMAGE, PATH_IMAGE_BLANK } from "../../../services/utils";
 import { Movie } from "../../../interfaces";
-import { motion } from "framer-motion";
 
 export const MovieCard = ({
   movie,
@@ -22,8 +21,7 @@ export const MovieCard = ({
   withRateDiv: boolean;
 }) => {
   return (
-    <motion.div
-      whileTap={{ scale: 0.8 }}
+    <div
       key={movie.id}
       className="relative hover:scale-105 w-min-content min-h-full flex justify-center items-center bg-[rgba(0,0,0,.4)] rounded"
     >
@@ -48,6 +46,6 @@ export const MovieCard = ({
           id={movie.id}
         />
       </Link>
-    </motion.div>
+    </div>
   );
 };
