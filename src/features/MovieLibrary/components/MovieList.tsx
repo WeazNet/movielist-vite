@@ -2,7 +2,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Loader } from "../../../design/atoms/Loader";
 import { Grid } from "../../../design/molecules/Grid";
 import { CardSkeleton } from "../../../design/atoms/CardSkeleton";
-import { BASE_PATH_IMAGE, NB_CARDS_IN_ONE_PAGE } from "../../../services/utils";
+import {
+  BASE_PATH_IMAGE,
+  NB_CARDS_IN_ONE_PAGE,
+  getRatingClassName,
+} from "../../../services/utils";
 import { HeartDiv } from "./HeartDiv";
 import { Link } from "react-router-dom";
 import { Card } from "../../../design/atoms/Card";
@@ -46,6 +50,14 @@ export const MovieList = ({
                 addMovieToFavorite={addMovieToFavorite}
                 removeMovieToFavorite={removeMovieToFavorite}
               />
+              <div
+                className={
+                  getRatingClassName(movie.vote_average) +
+                  " absolute ring-4 text-xl z-20 top-[.6em] left-[.6em] font-black rounded-full bg-[rgba(0,0,0,0.4)] w-[40px] h-[40px] pl-[.2em] pt-[.2em]"
+                }
+              >
+                <span>{movie.vote_average.toFixed(1)}</span>
+              </div>
               <Link title={movie.title} to={`/movie/${movie.id}`}>
                 <Card
                   imageSrc={
