@@ -63,4 +63,5 @@ export interface MoviesQueryResponse {
   prevOffset: number;
   total_pages: number;
   results: Movie[];
+  success: boolean | undefined;
 }

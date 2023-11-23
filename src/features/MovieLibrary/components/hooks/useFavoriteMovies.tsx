@@ -8,6 +8,7 @@ export const useFavoriteMovies = () => {
 
   useEffect(() => {
     localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
+    return () => { }
   }, [favoriteMovies]);
 
   const addMovieToFavorite = (movie: Movie) => {

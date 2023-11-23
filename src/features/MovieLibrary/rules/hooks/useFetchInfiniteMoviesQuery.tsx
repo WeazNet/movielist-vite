@@ -14,7 +14,6 @@ export const useFetchInfiniteMoviesQuery = ({
   }) => Promise<MoviesQueryResponse>;
 }) => {
   const { inputValue } = useContext(SearchBarContext);
-
   const { data, isLoading, fetchNextPage, hasNextPage, isError } =
     useInfiniteQuery({
       queryKey: ["movies", inputValue],
@@ -28,12 +27,13 @@ export const useFetchInfiniteMoviesQuery = ({
       },
     });
 
-  if (isError) throw Error("Server is unreachable");
+  if (isError || data?.pages[0]?.success === false)
+    throw Error("Server is unreachable");
 
   let hasMorePage = false;
   if (hasNextPage) hasMorePage = hasNextPage;
 
-  const movies: Movie[] | undefined = data?.pages.reduce(
+  const movies: Movie[] | undefined = data?.pages?.reduce(
     (prev: any[], curr) => {
       return [...prev, ...curr.results];
     },
