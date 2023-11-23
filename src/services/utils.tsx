@@ -20,7 +20,6 @@ export const getInitiales = (data: string) => {
 };
 
 export const getRatingClassName = (voteAverage: number) => {
-  console.log(voteAverage);
   if (voteAverage <= 0)
     return "ring-blue-300 text-blue-300"
   else if (voteAverage > 0 && voteAverage < 5)

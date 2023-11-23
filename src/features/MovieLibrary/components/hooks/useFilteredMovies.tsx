@@ -3,15 +3,18 @@ import { Movie } from "../../../../interfaces";
 import { SearchBarContext } from "../../../../contexts/SearchBarContext";
 
 export const useFilteredMovies = ({ movies }: { movies: Movie[] }) => {
-  const { inputValue } = useContext(SearchBarContext);
+  const { inputValue, setInputValue } = useContext(SearchBarContext);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
+    const lowercasedInput = inputValue.toLowerCase();
     const filtered =
       movies?.filter((movie) =>
-        movie.title.toLowerCase().includes(inputValue.toLowerCase())
+        movie.title.toLowerCase().includes(lowercasedInput)
       ) || [];
     setFilteredMovies(filtered);
+
+    return () => { };
   }, [inputValue]);
 
   return { filteredMovies };
