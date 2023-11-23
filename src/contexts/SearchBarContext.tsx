@@ -1,6 +1,11 @@
 import { createContext } from "react";
 
-export const SearchBarContext = createContext({
+interface SearchBarContextProps {
+  inputValue: string;
+  setInputValue: (value: string) => void;
+}
+
+export const SearchBarContext = createContext<SearchBarContextProps>({
   inputValue: "",
-  setInputValue: (value: string) => { },
+  setInputValue: () => { },
 });
