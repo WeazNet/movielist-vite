@@ -3,7 +3,7 @@ import { Movie } from "../../../../interfaces";
 import { SearchBarContext } from "../../../../contexts/SearchBarContext";
 
 export const useFilteredMovies = ({ movies }: { movies: Movie[] }) => {
-  const { inputValue, setInputValue } = useContext(SearchBarContext);
+  const { inputValue } = useContext(SearchBarContext);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
