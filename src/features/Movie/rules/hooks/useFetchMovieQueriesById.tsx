@@ -25,11 +25,11 @@ export const useFetchMovieQueries = (id: string) => {
   const isLoading = results.some((query) => query.isLoading);
   const isError = results.some((query) => query.isError);
 
+  if (isError) throw new Response("Movie not Found", { status: 404 })
+
   const movie: Movie | undefined = results[0].data;
   const credits: (Crew | Artist)[] | undefined = results[1].data;
   const images: Image[] | undefined = results[2].data;
-
-  if (isError) throw new Response("Movie not Found", { status: 404 })
 
   return { isLoading, movie, credits, images };
 };

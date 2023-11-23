@@ -6,7 +6,13 @@ import { Movie, MoviesQueryResponse } from "../../../../interfaces";
 
 export const useFetchInfiniteMoviesQuery = ({
   getMoviesFunction,
-}: { getMoviesFunction: ({ pageParam, }: { pageParam: number; }) => Promise<MoviesQueryResponse>; }) => {
+}: {
+  getMoviesFunction: ({
+    pageParam,
+  }: {
+    pageParam: number;
+  }) => Promise<MoviesQueryResponse>;
+}) => {
   const { inputValue } = useContext(SearchBarContext);
 
   const { data, isLoading, fetchNextPage, hasNextPage, isError } =
@@ -21,6 +27,9 @@ export const useFetchInfiniteMoviesQuery = ({
         return lastPage.prevOffset + 1;
       },
     });
+
+  if (isError) throw Error("Server is unreachable");
+
   let hasMorePage = false;
   if (hasNextPage) hasMorePage = hasNextPage;
 
@@ -30,8 +39,6 @@ export const useFetchInfiniteMoviesQuery = ({
     },
     []
   );
-
-  if (isError) throw Error("Server is unreachable");
 
   return { isLoading, movies, fetchNextPage, hasMorePage };
 };
