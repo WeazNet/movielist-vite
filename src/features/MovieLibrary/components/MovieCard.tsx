@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { HeartDiv } from "./HeartDiv";
 import { RateDiv } from "./RateDiv";
 import { Card } from "../../../design/atoms/Card";
-import { BASE_PATH_IMAGE } from "../../../services/utils";
+import { BASE_PATH_IMAGE, PATH_IMAGE_BLANK } from "../../../services/utils";
 import { Movie } from "../../../interfaces";
 
 export const MovieCard = ({
@@ -40,7 +40,7 @@ export const MovieCard = ({
           imageSrc={
             movie.poster_path
               ? BASE_PATH_IMAGE + movie.poster_path
-              : "https://placehold.co/500x750?text=?&font=roboto"
+              : PATH_IMAGE_BLANK
           }
           title={movie.title}
           id={movie.id}

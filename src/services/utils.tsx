@@ -1,4 +1,5 @@
 export const BASE_PATH_IMAGE: string = "https://image.tmdb.org/t/p/w500/";
+export const PATH_IMAGE_BLANK: string = "https://placehold.co/500x750?text=?&font=roboto";
 export const NB_CARDS_IN_ONE_PAGE: number = 10;
 export const NB_CARDS_IN_ONE_PAGE_QUERY: number = 20;
 export const THEMOVIEDB_URL_NOWPLAYING: string =
