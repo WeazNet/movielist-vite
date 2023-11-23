@@ -24,7 +24,7 @@ export const getRatingClassName = (voteAverage: number) => {
     return "ring-blue-300 text-blue-300"
   else if (voteAverage > 0 && voteAverage < 5)
     return "ring-red-300 text-red-300";
-  else if (voteAverage >= 5 && voteAverage < 8)
+  else if (voteAverage >= 5 && voteAverage < 7)
     return "ring-orange-300 text-orange-300";
   else
     return "ring-green-300 text-green-300";
